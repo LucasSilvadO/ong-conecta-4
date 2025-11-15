@@ -1,0 +1,337 @@
+/* ===========================================
+   Projeto: ONG Conecta
+   Autor: Lucas Silva de Oliveira
+   Versão: Entrega IV (Acessibilidade Completa)
+   =========================================== */
+
+/* ========== DESIGN SYSTEM ========== */
+:root {
+  /* Cores (8+) */
+  --cor-primaria: #0a6fa0;
+  --cor-primaria-escura: #094e73;
+  --cor-secundaria: #1e88e5;
+  --cor-secundaria-escura: #1565c0;
+  --cor-fundo: #f5f5f5;
+  --cor-texto: #333333;
+  --cor-neutra: #e3e3e3;
+  --cor-branca: #ffffff;
+
+  --cor-sucesso-bg: #d4edda;
+  --cor-sucesso-tx: #155724;
+  --cor-aviso-bg: #fff3cd;
+  --cor-aviso-tx: #856404;
+  --cor-erro-bg: #fdecea;
+  --cor-erro-tx: #b71c1c;
+
+  /* Tipografia */
+  --font-xl: 2.25rem;
+  --font-lg: 1.75rem;
+  --font-md: 1.25rem;
+  --font-sm: 1rem;
+  --font-xs: 0.875rem;
+
+  /* Espaçamentos */
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+
+  /* Bordas e sombras */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* ========== BASE ========== */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  text-align: center;
+  line-height: 1.5;
+}
+
+h1 { font-size: var(--font-xl); margin: var(--space-16) 0; }
+h2 { font-size: var(--font-lg); margin: var(--space-16) 0; }
+h3 { font-size: var(--font-md); margin: var(--space-16) 0; }
+p, label, input, select, textarea, button { font-size: var(--font-sm); }
+
+/* ========== IMAGENS ========== */
+img {
+  display: block;
+  margin: var(--space-8) auto;
+  max-width: 520px;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  transition: transform 0.3s ease;
+}
+img:hover { transform: scale(1.02); }
+
+/* ========== CABEÇALHO E RODAPÉ ========== */
+header, footer {
+  background-color: var(--cor-primaria);
+  color: var(--cor-branca);
+  text-align: center;
+  padding: var(--space-16);
+}
+.logo { width: 25%; max-width: 250px; height: auto; }
+
+/* ========== NAVEGAÇÃO ========== */
+nav { position: relative; }
+nav ul { list-style: none; padding: 0; margin: 0; }
+nav li { display: inline-block; position: relative; margin: 0 var(--space-8); }
+nav a {
+  color: var(--cor-branca);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+}
+nav a:hover,
+nav a.ativo { text-decoration: underline; }
+
+/* ========== MENU MOBILE ========== */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 32px;
+  height: 26px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1100;
+}
+.menu-toggle span {
+  display: block;
+  height: 4px;
+  width: 100%;
+  background-color: var(--cor-branca);
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+}
+/* animação X */
+.menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
+/* Mostrar menu no mobile */
+#menu.active { display: block; }
+
+/* ========== SUBMENU ========== */
+.submenu { position: relative; display: inline-block; }
+.submenu-list {
+  display: none;
+  position: absolute;
+  top: 100%; left: 0;
+  background-color: var(--cor-primaria);
+  padding: 10px 0;
+  list-style: none;
+  min-width: 180px;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-md);
+  z-index: 1000;
+}
+.submenu-list.show { display: block; }
+.submenu-list li a:hover {
+  background-color: var(--cor-primaria-escura);
+}
+
+/* ========== GRID ========== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-inline: var(--space-16);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--space-16);
+}
+
+/* ========== SEÇÕES / CARDS ========== */
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-40, 40px);
+  padding: var(--space-40, 40px) var(--space-20, 20px);
+}
+section.card {
+  max-width: 900px;
+  width: 100%;
+  background: var(--cor-branca);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-20, 20px);
+  text-align: center;
+  margin-bottom: var(--space-40, 40px);
+}
+
+/* ========== FORMULÁRIOS ========== */
+form {
+  background: var(--cor-branca);
+  padding: var(--space-20, 20px);
+  border-radius: var(--radius-sm);
+  max-width: 600px;
+  margin: auto;
+  box-shadow: var(--shadow-sm);
+}
+label { display: block; margin-top: var(--space-8); text-align: left; }
+input, select, textarea, button {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: var(--cor-branca);
+}
+
+/* Foco visível */
+input:focus, select:focus, textarea:focus, button:focus, a:focus {
+  outline: 2px solid var(--cor-secundaria);
+  outline-offset: 2px;
+}
+
+/* ========== BOTÕES ========== */
+button {
+  background-color: var(--cor-primaria);
+  color: var(--cor-branca);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+button:hover { background-color: var(--cor-primaria-escura); }
+
+/* ========== TAGS ========== */
+.tag {
+  display: inline-block;
+  padding: 6px 10px;
+  margin: 6px 4px 0;
+  background: var(--cor-neutra);
+  color: #222;
+  border-radius: 999px;
+  font-size: var(--font-xs);
+  font-weight: 600;
+}
+
+/* ========== ALERTAS ========== */
+.alert {
+  margin-top: var(--space-16);
+  padding: var(--space-12, 12px);
+  border-radius: var(--radius-sm);
+  font-weight: bold;
+}
+.alert.sucesso { background-color: var(--cor-sucesso-bg); color: var(--cor-sucesso-tx); }
+.alert.aviso { background-color: var(--cor-aviso-bg); color: var(--cor-aviso-tx); }
+
+/* ================================================
+   BOTÕES DE ACESSIBILIDADE
+   ================================================ */
+.acessibilidade-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px 0;
+}
+.acessibilidade-btns button {
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 6px;
+}
+
+/* ================================================
+   MODO ESCURO
+   ================================================ */
+.dark-mode {
+  --cor-fundo: #1b1b1b;
+  --cor-texto: #eaeaea;
+  --cor-branca: #2b2b2b;
+  --cor-neutra: #444;
+  --cor-primaria: #0e76c7;
+  --cor-primaria-escura: #095a96;
+}
+
+.dark-mode body,
+.dark-mode main {
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+}
+
+.dark-mode header,
+.dark-mode footer {
+  background: var(--cor-primaria-escura);
+}
+
+.dark-mode input,
+.dark-mode textarea,
+.dark-mode select {
+  background: #333;
+  color: #fff;
+  border: 1px solid #777;
+}
+
+.dark-mode .card {
+  background: #2c2c2c;
+}
+
+/* ================================================
+   ALTO CONTRASTE
+   ================================================ */
+.high-contrast {
+  --cor-fundo: #000;
+  --cor-texto: rgb(255, 7, 7);
+  --cor-branca: rgb(255, 0, 0);
+  --cor-neutra: #2f05ff;
+  --cor-primaria: #ff0;
+  --cor-primaria-escura: #ff0;
+}
+
+.high-contrast * {
+  outline: none !important;
+}
+.high-contrast body,
+.high-contrast main {
+  background: #000 !important;
+  color: #fff !important;
+}
+.high-contrast header,
+.high-contrast footer {
+  background: #000 !important;
+  color: #ff0 !important;
+}
+
+.high-contrast .card {
+  background: #000;
+  color: #ff0;
+  border: 2px solid #ff0;
+}
+
+.high-contrast input,
+.high-contrast textarea,
+.high-contrast select {
+  background: #000;
+  color: #ff0;
+  border: 2px solid #ff0;
+}
+
+/* ================================================
+   RESPONSIVIDADE
+   ================================================ */
+@media (max-width: 900px) {
+  .menu-toggle { display: flex; }
+  nav li { display: block; margin: 10px 0; }
+  #menu { display: none; background: var(--cor-primaria); padding: 20px 0; }
+  #menu.active { display: block; }
+}
